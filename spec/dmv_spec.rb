@@ -37,6 +37,7 @@ RSpec.describe Dmv do
       @dmv.add_facility(@facility_2)
       @dmv.add_facility(@facility_3)
 
+#      require 'pry', binding.pry
       expect(@dmv.facilities_offering_service('Road Test')).to eq([@facility_2, @facility_3])
     end
   end
