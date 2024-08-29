@@ -23,4 +23,27 @@ RSpec.describe Facility do
       expect(@facility.services).to eq(['New Drivers License', 'Renew Drivers License', 'Vehicle Registration'])
     end
   end
+  describe '#register_vehicle' do
+    it 'can register an antique vehicle' do
+      #adds to registered_vehicles array
+      #incremements collected_fees by $25
+      #sets vehicle.registration_date
+      #sets vehicle.plate_type to :antique
+      expect(true).to eq false
+    end
+    it 'can register an electric vehicle' do
+      #adds to registered_vehicles array
+      #incremements collected_fees by $200
+      #sets vehicle.registration_date
+      #sets vehicle.plate_type to :ev
+      expect(true).to eq false
+    end
+    it 'can register an other vehicle' do
+      #adds to registered_vehicles array
+      #incremements collected_fees by $100
+      #sets vehicle.registration_date
+      #sets vehicle.plate_type to :antique
+      expect(true).to eq false
+    end
+  end
 end
