@@ -54,7 +54,7 @@ RSpec.describe Facility do
       expect(@electric_car.registration_date).to eq(Date.today)
       expect(@electric_car.plate_type).to eq(:ev)
     end
-    it 'can register an other vehicle' do
+    it 'can register a regular vehicle' do
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       expect(@normal_car.registration_date).to eq(nil)
@@ -63,7 +63,7 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to eq([@normal_car])
       expect(@facility.collected_fees).to eq(100)
       expect(@normal_car.registration_date).to eq(Date.today)
-      expect(@normal_car.plate_type).to eq(:normal)
+      expect(@normal_car.plate_type).to eq(:regular)
     end
     it 'can register an antique ev' do
       expect(@facility.registered_vehicles).to eq([])

@@ -41,10 +41,10 @@ RSpec.describe Vehicle do
       expect(@cruz.plate_type).to eq(nil)
       expect(@bolt.plate_type).to eq(nil)
       expect(@camaro.plate_type).to eq(nil)
-      @cruz.set_plate_type(:normal)
+      @cruz.set_plate_type(:regular)
       @bolt.set_plate_type(:ev)
       @camaro.set_plate_type(:antique)
-      expect(@cruz.plate_type).to eq(:normal)
+      expect(@cruz.plate_type).to eq(:regular)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@camaro.plate_type).to eq(:antique)
     end

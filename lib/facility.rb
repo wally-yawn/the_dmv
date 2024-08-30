@@ -13,7 +13,7 @@ class Facility
   def add_service(service)
     @services << service
   end
-
+git
   def register_vehicle(vehicle)
     if vehicle.antique? == true
       @collected_fees += 25
@@ -29,7 +29,7 @@ class Facility
 
     else
       @collected_fees += 100
-      vehicle.set_plate_type(:normal)
+      vehicle.set_plate_type(:regular)
       vehicle.set_registration_date
       @registered_vehicles << vehicle
     end
