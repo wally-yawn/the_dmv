@@ -17,6 +17,8 @@ RSpec.describe Facility do
       expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@facility.phone).to eq('(720) 865-4600')
       expect(@facility.services).to eq([])
+      expect(@facility.register_vehicles).to eq([])
+      expect(@facility.collected_fees).to eq(0)
     end
   end
 
@@ -31,27 +33,31 @@ RSpec.describe Facility do
   end
   describe '#register_vehicle' do
     it 'can register an antique vehicle' do
-      #adds to registered_vehicles array
-      #incremements collected_fees by $25
-      #sets vehicle.registration_date
-      #sets vehicle.plate_type to :antique
-      expect(true).to eq false
+      expect(@facility.registered_vehicles).to eq([])
+      expect(@facility.collected_fees).to eq(0)
+      expect(@antique_car.registration_date).to eq(nil)
+      expect(@antique_car.plate_type).to eq(nil)
+      @facility.register_vehicle(@antique_car)
+      expect(@facility.registered_vehicles).to eq([@antique_car])
+      expect(@facility.collected_fees).to eq(25)
+      expect(@antique_car.registration_date).to eq(Date.today.strftime("%Y-%m-%d"))
+      expect(@antique_car.plate_type).to eq(:antique)
     end
-    it 'can register an electric vehicle' do
+    xit 'can register an electric vehicle' do
       #adds to registered_vehicles array
       #incremements collected_fees by $200
       #sets vehicle.registration_date
       #sets vehicle.plate_type to :ev
       expect(true).to eq false
     end
-    it 'can register an other vehicle' do
+    xit 'can register an other vehicle' do
       #adds to registered_vehicles array
       #incremements collected_fees by $100
       #sets vehicle.registration_date
       #sets vehicle.plate_type to :antique
       expect(true).to eq false
     end
-    it 'can register an antique ev' do
+    xit 'can register an antique ev' do
       #adds to registered_vehicles array
       #incremements collected_fees by $25
       #sets vehicle.registration_date
