@@ -54,7 +54,7 @@ RSpec.describe Vehicle do
     it 'can set registration_date' do
       expect(@cruz.registration_date).to eq(nil)
       @cruz.set_registration_date
-      expect(@cruz.registration_date).to eq(Date.today.strftime("%Y-%m-%d"))
+      expect(@cruz.registration_date).to eq(Date.today)
     end
   end
 end

@@ -32,6 +32,6 @@ class Vehicle
   end
 
   def set_registration_date
-    @registration_date = Date.today.strftime("%Y-%m-%d")
+    @registration_date = Date.today
   end
 end
