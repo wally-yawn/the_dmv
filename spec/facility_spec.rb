@@ -2,7 +2,13 @@ require 'spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
+    @antique_model_year = Time.now.year - 26
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
+    @antique_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year - 50, make: 'Chevrolet', model: 'Cruz', engine: :ice})
+    @normal_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Subaru', model: 'Outback', engine: :ice})
+    @electric_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Nissan', model: 'Leaf', engine: :ev})
+    @antique_electric_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year, make: 'Nissan', model: 'Leaf', engine: :ev})
+
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -41,6 +47,13 @@ RSpec.describe Facility do
     it 'can register an other vehicle' do
       #adds to registered_vehicles array
       #incremements collected_fees by $100
+      #sets vehicle.registration_date
+      #sets vehicle.plate_type to :antique
+      expect(true).to eq false
+    end
+    it 'can register an antique ev' do
+      #adds to registered_vehicles array
+      #incremements collected_fees by $25
       #sets vehicle.registration_date
       #sets vehicle.plate_type to :antique
       expect(true).to eq false
