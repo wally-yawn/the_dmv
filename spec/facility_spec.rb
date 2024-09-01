@@ -2,13 +2,12 @@ require 'spec_helper'
 
 RSpec.describe Facility do
   before(:each) do
-    @antique_model_year = Time.now.year - 26
+    @antique_model_year = Time.now.year - 25
     @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600'})
     @antique_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year - 50, make: 'Chevrolet', model: 'Cruz', engine: :ice})
     @normal_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Subaru', model: 'Outback', engine: :ice})
     @electric_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Nissan', model: 'Leaf', engine: :ev})
     @antique_electric_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year, make: 'Nissan', model: 'Leaf', engine: :ev})
-
   end
   describe '#initialize' do
     it 'can initialize' do
@@ -32,7 +31,12 @@ RSpec.describe Facility do
     end
   end
   describe '#register_vehicle' do
+    before(:each) do
+      @facility.add_service('Vehicle Registration')
+    end
+
     it 'can register an antique vehicle' do
+      @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       expect(@antique_car.registration_date).to eq(nil)
@@ -44,6 +48,7 @@ RSpec.describe Facility do
       expect(@antique_car.plate_type).to eq(:antique)
     end
     it 'can register an electric vehicle' do
+      @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       expect(@electric_car.registration_date).to eq(nil)
@@ -55,10 +60,11 @@ RSpec.describe Facility do
       expect(@electric_car.plate_type).to eq(:ev)
     end
     it 'can register a regular vehicle' do
+      @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       expect(@normal_car.registration_date).to eq(nil)
-      expect(@electric_car.plate_type).to eq(nil)
+      expect(@normal_car.plate_type).to eq(nil)
       @facility.register_vehicle(@normal_car)
       expect(@facility.registered_vehicles).to eq([@normal_car])
       expect(@facility.collected_fees).to eq(100)
@@ -66,6 +72,7 @@ RSpec.describe Facility do
       expect(@normal_car.plate_type).to eq(:regular)
     end
     it 'can register an antique ev' do
+      @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       expect(@antique_electric_car.registration_date).to eq(nil)
@@ -77,6 +84,7 @@ RSpec.describe Facility do
       expect(@antique_electric_car.plate_type).to eq(:antique)
     end
     it 'can register multiple cars' do
+      @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
       @facility.register_vehicle(@antique_car)
@@ -85,6 +93,16 @@ RSpec.describe Facility do
       @facility.register_vehicle(@antique_electric_car)
       expect(@facility.registered_vehicles).to eq([@antique_car,@electric_car,@normal_car,@antique_electric_car])
       expect(@facility.collected_fees).to eq(350)
+    end
+    it 'cannot register cars if the facility does not have the vehicle_registration service' do
+      @facility.services.delete('Vehicle Registration')
+      expect(@facility.services).to eq([])
+      expect(@facility.registered_vehicles).to eq([])
+      puts @facility.services
+      expect(@facility.collected_fees).to eq(0)
+      @facility.register_vehicle(@antique_car)
+      expect(@facility.registered_vehicles).to eq([])
+      expect(@facility.collected_fees).to eq(0)
     end
   end
 end
