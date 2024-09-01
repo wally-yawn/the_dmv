@@ -105,4 +105,17 @@ RSpec.describe Facility do
       expect(@facility.collected_fees).to eq(0)
     end
   end
+  describe '#administer_written_test' do
+    before(:each) do
+      @facility.add_service('Written Test')
+      @registrant1 = Registrant.new("Wally Wallace", 16)
+      @registrant2 = Registrant.new('Dahlia Wallace', 15)
+    end
+    it 'can administer written test if the registrant is 16 or older'
+      expect(true).to eq(false)
+    end
+    it 'cannot administer written test if the registrant is not 16 or older'
+    expect(true).to eq(false)
+  end
+  end
 end
