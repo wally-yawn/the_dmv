@@ -111,11 +111,13 @@ RSpec.describe Facility do
       @registrant1 = Registrant.new("Wally Wallace", 16)
       @registrant2 = Registrant.new('Dahlia Wallace', 15)
     end
-    it 'can administer written test if the registrant is 16 or older'
-      expect(true).to eq(false)
+    it 'can administer written test if the registrant is 16 or older' do
+      expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+      expect(@facility.administer_written_test(@registrant1)).to eq(true)
     end
-    it 'cannot administer written test if the registrant is not 16 or older'
-    expect(true).to eq(false)
-  end
+    it 'cannot administer written test if the registrant is not 16 or older' do
+      expect(@registrant2.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+      expect(@facility.administer_written_test(@registrant2)).to eq(false)
+    end
   end
 end

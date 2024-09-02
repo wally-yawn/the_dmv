@@ -36,4 +36,12 @@ class Facility
       end
     end
   end
+
+  def administer_written_test(registrant)
+    if registrant.age >= 16
+      true
+    else
+      false
+    end
+  end
 end
