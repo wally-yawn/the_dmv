@@ -5,6 +5,7 @@ RSpec.describe FacilityFactory do
     @facility_factory1 = FacilityFactory.new
     @co_locations = DmvDataService.new.co_dmv_office_locations
     @ny_locations = DmvDataService.new.ny_dmv_office_locations
+    @mo_locations = DmvDataService.new.mo_dmv_office_locations
   end
 
   describe '#initialize' do
@@ -56,6 +57,21 @@ RSpec.describe FacilityFactory do
     end
   end
 
+  describe '#create_mo_facilities' do
+  it 'can create mo facilities_directly' do
+    expect(@facility_factory1.facilities).to eq([])
+    @facility_factory1.create_mo_facilities(@mo_locations)
+    expect(@facility_factory1.facilities[0]).to be_an_instance_of(Facility)
+    expect(@facility_factory1.facilities[0].name).to eq('OAKVILLE')
+    expect(@facility_factory1.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
+    expect(@facility_factory1.facilities[0].phone).to eq('(314) 887-1050')
+    expect(@facility_factory1.facilities[0].services).to eq([])
+    expect(@facility_factory1.facilities[0].registered_vehicles).to eq([])
+    expect(@facility_factory1.facilities[0].collected_fees).to eq(0)
+    expect(@facility_factory1.facilities.length).to eq(178)
+  end
+end
+
   describe '#create_facilities' do
     it 'can create co facilities' do
       expect(@facility_factory1.facilities).to eq([])
@@ -82,7 +98,18 @@ RSpec.describe FacilityFactory do
       expect(@facility_factory1.facilities[1].collected_fees).to eq(0)
       expect(@facility_factory1.facilities.length).to eq(172)
     end
-  end
 
-  #format address tests
+    it 'can create mo facilities' do
+      expect(@facility_factory1.facilities).to eq([])
+      @facility_factory1.create_facilities(@mo_locations)
+      expect(@facility_factory1.facilities[0]).to be_an_instance_of(Facility)
+      expect(@facility_factory1.facilities[0].name).to eq('OAKVILLE')
+      expect(@facility_factory1.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
+      expect(@facility_factory1.facilities[0].phone).to eq('(314) 887-1050')
+      expect(@facility_factory1.facilities[0].services).to eq([])
+      expect(@facility_factory1.facilities[0].registered_vehicles).to eq([])
+      expect(@facility_factory1.facilities[0].collected_fees).to eq(0)
+      expect(@facility_factory1.facilities.length).to eq(178)
+    end
+  end
 end

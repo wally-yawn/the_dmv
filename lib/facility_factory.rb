@@ -30,11 +30,22 @@ class FacilityFactory
     end
   end
 
+  def create_mo_facilities(mo_facilities)
+    mo_facilities.each do |facility|
+      name = facility[:name]
+      address = format_address(facility[:address1],nil,facility[:city],facility[:state],facility[:zipcode])
+      phone = facility[:phone]
+      @facilities << Facility.new({name: name, address: address, phone: phone})
+    end
+  end
+
   def create_facilities(facilities)
     if facilities[0][:state] == 'CO'
       create_co_facilities(facilities)
     elsif facilities[0][:state] == 'NY'
       create_ny_facilities(facilities)
+    elsif facilities[0][:state] == 'MO'
+      create_mo_facilities(facilities)
     end
   end
 end
