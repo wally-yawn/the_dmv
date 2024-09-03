@@ -173,7 +173,7 @@ RSpec.describe Facility do
     end
   end
 
-  describe 'renew_license' do
+  describe 'renew_drivers_license' do
     before(:each) do
       @facility.add_service('Written Test')
       @facility.add_service('Road Test')
@@ -190,19 +190,19 @@ RSpec.describe Facility do
 
     it 'can renew license if the registrant already has a license' do
       expect(@registrant1.license_data).to eq({:license=>true, :renewed=>false, :written=>true})
-      expect(@facility.renew_license(@registrant1)).to eq(true)
+      expect(@facility.renew_drivers_license(@registrant1)).to eq(true)
       expect(@registrant1.license_data).to eq(({:license=>true, :renewed=>true, :written=>true}))
     end
 
     it 'cannot renew license if the registrant does not have a license' do
       expect(@registrant2.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
-      expect(@facility.renew_license(@registrant2)).to eq(false)
+      expect(@facility.renew_drivers_license(@registrant2)).to eq(false)
       expect(@registrant2.license_data).to eq({:license=>false, :renewed=>false, :written=>true})
     end
 
     it 'cannot renew license if the registrant has a license but does not have the renew license service' do
       expect(@registrant1.license_data).to eq({:license=>true, :renewed=>false, :written=>true})
-      expect(@facility2.renew_license(@registrant1)).to eq(false)
+      expect(@facility2.renew_drivers_license(@registrant1)).to eq(false)
       expect(@registrant1.license_data).to eq({:license=>true, :renewed=>false, :written=>true})
     end
   end
