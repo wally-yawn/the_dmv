@@ -117,26 +117,43 @@ RSpec.describe Facility do
     it 'can administer written test if the registrant is 16 or older and has a permit' do
       expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant1)).to eq(true)
+      expect(@registrant1.license_data[:written]).to eq(true)
     end
     it 'cannot administer written test if the registrant is not 16 or older and has a permit' do
       expect(@registrant2.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant2)).to eq(false)
+      expect(@registrant2.license_data[:written]).to eq(false)
     end
     it 'cannot administer written test if the registrant is 16 or older but has no permit' do
       expect(@registrant3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant3)).to eq(false)
+      expect(@registrant3.license_data[:written]).to eq(false)
     end
     it 'cannot administer written test if the registrant is not 16 or older and has no a permit' do
       expect(@registrant4.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant4)).to eq(false)
+      expect(@registrant3.license_data[:written]).to eq(false)
     end
     it 'cannot administer written test if the registrant is 16 or older and has a permit but does not have the written test service' do
       expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility2.administer_written_test(@registrant1)).to eq(false)
+      expect(@registrant1.license_data[:written]).to eq(false)
     end
   end
-
-  #aminister written test needs service
+  describe '#administer_road_test' do
+    before(:each) do
+      @facility.add_service('Road Test')
+      @facility2 = Facility.new({name: 'DMV Federal Branch', address: '123 Federal Suite 118 Denver CO 80205', phone: '(720) 865-1234'})
+      @registrant1 = Registrant.new("Wally1", 16, true)
+      @registrant2 = Registrant.new('Wally2', 15, true)
+      @registrant3 = Registrant.new("Wally3", 16)
+      @registrant4 = Registrant.new('Wally4', 15)
+    end
+    xit 'can administer written test if the registrant is 16 or older and has a permit' do
+      expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
+      expect(@facility.administer_written_test(@registrant1)).to eq(true)
+    end
+end
 #   Administer a road test
 # A road test can only be administered to registrants who have passed the written test
 # For simplicity’s sake, Registrants who qualify for the road test automatically earn a license
