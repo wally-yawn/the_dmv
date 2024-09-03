@@ -13,6 +13,7 @@ RSpec.describe Registrant do
       expect(@registrant1.permit?).to eq(false)
       expect(@registrant1.license_data).to eq({:written=>false, :license=>false, :renewed=>false})
     end
+    
     it 'can initialize with a permit passed in' do
       expect(@registrant2).to be_an_instance_of(Registrant)
       expect(@registrant2.name).to eq("Dahlia")

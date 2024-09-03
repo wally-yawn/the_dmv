@@ -5,9 +5,7 @@ class VehicleFactory
   end
 
   def create_vehicles(registrations)
-    
     registrations.each do |registration|
-      #require 'pry'; binding.pry
       vin = registration[:vin_1_10]
       year = registration[:model_year]
       make = registration[:make]

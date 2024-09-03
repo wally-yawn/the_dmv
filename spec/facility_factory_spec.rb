@@ -41,7 +41,6 @@ RSpec.describe FacilityFactory do
     end
   end
 
-
   describe '#create_ny_facilities' do
     it 'can create ny facilities_directly' do
       expect(@facility_factory1.facilities).to eq([])
@@ -58,19 +57,19 @@ RSpec.describe FacilityFactory do
   end
 
   describe '#create_mo_facilities' do
-  it 'can create mo facilities_directly' do
-    expect(@facility_factory1.facilities).to eq([])
-    @facility_factory1.create_mo_facilities(@mo_locations)
-    expect(@facility_factory1.facilities[0]).to be_an_instance_of(Facility)
-    expect(@facility_factory1.facilities[0].name).to eq('OAKVILLE')
-    expect(@facility_factory1.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
-    expect(@facility_factory1.facilities[0].phone).to eq('(314) 887-1050')
-    expect(@facility_factory1.facilities[0].services).to eq([])
-    expect(@facility_factory1.facilities[0].registered_vehicles).to eq([])
-    expect(@facility_factory1.facilities[0].collected_fees).to eq(0)
-    expect(@facility_factory1.facilities.length).to eq(178)
+    it 'can create mo facilities_directly' do
+      expect(@facility_factory1.facilities).to eq([])
+      @facility_factory1.create_mo_facilities(@mo_locations)
+      expect(@facility_factory1.facilities[0]).to be_an_instance_of(Facility)
+      expect(@facility_factory1.facilities[0].name).to eq('OAKVILLE')
+      expect(@facility_factory1.facilities[0].address).to eq('3164 TELEGRAPH ROAD ST LOUIS MO 63125')
+      expect(@facility_factory1.facilities[0].phone).to eq('(314) 887-1050')
+      expect(@facility_factory1.facilities[0].services).to eq([])
+      expect(@facility_factory1.facilities[0].registered_vehicles).to eq([])
+      expect(@facility_factory1.facilities[0].collected_fees).to eq(0)
+      expect(@facility_factory1.facilities.length).to eq(178)
+    end
   end
-end
 
   describe '#create_facilities' do
     it 'can create co facilities' do

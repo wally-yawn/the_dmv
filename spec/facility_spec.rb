@@ -61,6 +61,7 @@ RSpec.describe Facility do
       expect(@electric_car.registration_date).to eq(Date.today)
       expect(@electric_car.plate_type).to eq(:ev)
     end
+
     it 'can register a regular vehicle' do
       @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
@@ -73,6 +74,7 @@ RSpec.describe Facility do
       expect(@normal_car.registration_date).to eq(Date.today)
       expect(@normal_car.plate_type).to eq(:regular)
     end
+
     it 'can register an antique ev' do
       @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
@@ -85,6 +87,7 @@ RSpec.describe Facility do
       expect(@antique_electric_car.registration_date).to eq(Date.today)
       expect(@antique_electric_car.plate_type).to eq(:antique)
     end
+
     it 'can register multiple cars' do
       @facility.add_service('Vehicle Registration')
       expect(@facility.registered_vehicles).to eq([])
@@ -96,6 +99,7 @@ RSpec.describe Facility do
       expect(@facility.registered_vehicles).to eq([@antique_car,@electric_car,@normal_car,@antique_electric_car])
       expect(@facility.collected_fees).to eq(350)
     end
+
     it 'cannot register cars if the facility does not have the vehicle_registration service' do
       @facility.services.delete('Vehicle Registration')
       expect(@facility.services).to eq([])
@@ -117,26 +121,31 @@ RSpec.describe Facility do
       @registrant3 = Registrant.new("Wally3", 16)
       @registrant4 = Registrant.new('Wally4', 15)
     end
+
     it 'can administer written test if the registrant is 16 or older and has a permit' do
       expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant1)).to eq(true)
       expect(@registrant1.license_data[:written]).to eq(true)
     end
+
     it 'cannot administer written test if the registrant is not 16 or older and has a permit' do
       expect(@registrant2.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant2)).to eq(false)
       expect(@registrant2.license_data[:written]).to eq(false)
     end
+
     it 'cannot administer written test if the registrant is 16 or older but has no permit' do
       expect(@registrant3.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant3)).to eq(false)
       expect(@registrant3.license_data[:written]).to eq(false)
     end
+
     it 'cannot administer written test if the registrant is not 16 or older and has no a permit' do
       expect(@registrant4.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility.administer_written_test(@registrant4)).to eq(false)
       expect(@registrant3.license_data[:written]).to eq(false)
     end
+    
     it 'cannot administer written test if the registrant is 16 or older and has a permit but does not have the written test service' do
       expect(@registrant1.license_data).to eq({:license=>false, :renewed=>false, :written=>false})
       expect(@facility2.administer_written_test(@registrant1)).to eq(false)
