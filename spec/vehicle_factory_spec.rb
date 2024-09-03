@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-RSpec.describe Vehicle_factory do
+RSpec.describe VehicleFactory do
   before(:each) do
-    @vehicle_factory1 = Vehicle_factory.new
+    @vehicle_factory1 = VehicleFactory.new
     @wa_ev_registrations = DmvDataService.new.wa_ev_registrations
   end
 
   describe '#initialize' do
     it 'can initialize' do
-      expect(@vehicle_factory1).to be_an_instance_of(Vehicle_factory)
+      expect(@vehicle_factory1).to be_an_instance_of(VehicleFactory)
     end
   end
 

@@ -1,4 +1,4 @@
-class Vehicle_factory
+class VehicleFactory
   attr_reader :vehicles
   def initialize
     @vehicles = []
