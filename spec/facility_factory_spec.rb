@@ -13,6 +13,18 @@ RSpec.describe FacilityFactory do
     end
   end
 
+  describe '#format_address' do
+    it "can format an address with a 2nd street address" do
+      address = @facility_factory1.format_address("add1", "add2", "city", "state", "zip")
+      expect(address).to eq("add1 add2 city state zip")
+    end
+
+    it "can format an address without a 2nd street address" do
+      address = @facility_factory1.format_address("add1", nil, "city", "state", "zip")
+      expect(address).to eq("add1 city state zip")
+    end
+  end
+
   describe '#create_co_facilities' do
     it 'can create co facilities_directly' do
       expect(@facility_factory1.facilities).to eq([])
