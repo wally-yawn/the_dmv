@@ -3,9 +3,9 @@ require 'spec_helper'
 RSpec.describe Vehicle do
   before(:each) do
     @antique_model_year = Time.now.year - 25
-    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Chevrolet', model: 'Cruz', engine: :ice} )
-    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: Time.now.year + 1, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
-    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: @antique_model_year, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
+    @cruz = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Chevrolet', model: 'Cruz', engine: :ice, county: 'Adams'} )
+    @bolt = Vehicle.new({vin: '987654321abcdefgh', year: Time.now.year + 1, make: 'Chevrolet', model: 'Bolt', engine: :ev, county: 'Adams'} )
+    @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: @antique_model_year, make: 'Chevrolet', model: 'Camaro', engine: :ice, county: 'Denver'} )
   end
   
   describe '#initialize' do
@@ -18,6 +18,7 @@ RSpec.describe Vehicle do
       expect(@cruz.engine).to eq(:ice)
       expect(@cruz.registration_date).to eq(nil)
       expect(@cruz.plate_type).to eq(nil)
+      expect(@cruz.county).to eq('Adams')
     end
   end
 
