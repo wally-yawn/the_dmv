@@ -17,7 +17,8 @@ class FacilityFactory
       name = facility[:dmv_office]
       address = format_address(facility[:address_li],facility[:address__1],facility[:city],facility[:state],facility[:zip])
       phone = facility[:phone]
-      @facilities << Facility.new({name: name, address: address, phone: phone})
+      hours_of_operation = facility[:hours]
+      @facilities << Facility.new({name: name, address: address, phone: phone, hours_of_operation: hours_of_operation})
     end
   end
 
@@ -26,7 +27,13 @@ class FacilityFactory
       name = facility[:office_name]
       address = format_address(facility[:street_address_line_1], facility[:street_address_line_2], facility[:city], facility[:state], facility[:zip_code])
       phone = facility[:public_phone_number]
-      @facilities << Facility.new({name: name, address: address, phone: phone})
+      m_hours = "M #{facility[:monday_beginning_hours]} - #{facility[:monday_ending_hours]}"
+      t_hours = "T #{facility[:tuesday_beginning_hours]} - #{facility[:tuesdat_hours]}"
+      w_hours = "W #{facility[:wednesday_beginning_hours]} - #{facility[:wednesday_ending_hours]}"
+      r_hours = "R #{facility[:thursday_beginning_hours]} - #{facility[:thursday_ending_hours]}"
+      f_hours = "F #{facility[:friday_beginning_hours]} - #{facility[:friday_ending_hours]}"
+      hours_of_operation = "#{m_hours} #{t_hours} #{w_hours} #{r_hours} #{f_hours}"
+      @facilities << Facility.new({name: name, address: address, phone: phone, hours_of_operation: hours_of_operation})
     end
   end
 
@@ -35,7 +42,8 @@ class FacilityFactory
       name = facility[:name]
       address = format_address(facility[:address1],nil,facility[:city],facility[:state],facility[:zipcode])
       phone = facility[:phone]
-      @facilities << Facility.new({name: name, address: address, phone: phone})
+      hours_of_operation = facility[:daysopen]
+      @facilities << Facility.new({name: name, address: address, phone: phone, hours_of_operation: hours_of_operation})
     end
   end
 
