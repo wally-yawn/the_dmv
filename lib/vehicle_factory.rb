@@ -4,7 +4,7 @@ class VehicleFactory
     @vehicles = []
   end
 
-  def create_vehicles(registrations)
+  def create_wa_vehicles(registrations)
     registrations.each do |registration|
       vin = registration[:vin_1_10]
       year = registration[:model_year]
@@ -14,6 +14,26 @@ class VehicleFactory
       engine = :ev
       @vehicles << Vehicle.new({vin: vin, year: year, make: make, model: model, engine: engine, county: county})
     end
+  end
+
+  def create_ny_vehicles(registrations)
+    registrations.each do |registration|
+      vin = registration[:vin]
+      year = registration[:model_year]
+      make = registration[:make]
+      model = registration[:body_type]
+      county = registration[:county]
+      engine = registration[:fuel_type]
+      @vehicles << Vehicle.new({vin: vin, year: year, make: make, model: model, engine: engine, county: county})
+    end
+  end
+
+  def create_vehicles(registrations)
+   if registrations[0][:state] == 'NY'
+    create_ny_vehicles(registrations)
+   elsif registrations[0][:state_of_residence] == 'WA'
+    create_wa_vehicles(registrations)
+   end
   end
 
   def most_popular_make_model_registered
