@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Facility do
   before(:each) do
     @antique_model_year = Time.now.year - 25
-    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours_of_operation: 'M-F 8-5'})
+    @facility = Facility.new({name: 'DMV Tremont Branch', address: '2855 Tremont Place Suite 118 Denver CO 80205', phone: '(720) 865-4600', hours_of_operation: 'M-F 8-5', holidays_closed: "Labor Day"})
     @antique_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year - 50, make: 'Chevrolet', model: 'Cruz', engine: :ice})
     @normal_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Subaru', model: 'Outback', engine: :ice})
     @electric_car = Vehicle.new({vin: '123456789abcdefgh', year: @antique_model_year + 1, make: 'Nissan', model: 'Leaf', engine: :ev})
@@ -16,6 +16,7 @@ RSpec.describe Facility do
       expect(@facility.address).to eq('2855 Tremont Place Suite 118 Denver CO 80205')
       expect(@facility.phone).to eq('(720) 865-4600')
       expect(@facility.hours_of_operation).to eq('M-F 8-5')
+      expect(@facility.holidays_closed).to eq('Labor Day')
       expect(@facility.services).to eq([])
       expect(@facility.registered_vehicles).to eq([])
       expect(@facility.collected_fees).to eq(0)
