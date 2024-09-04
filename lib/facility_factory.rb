@@ -43,7 +43,8 @@ class FacilityFactory
       address = format_address(facility[:address1],nil,facility[:city],facility[:state],facility[:zipcode])
       phone = facility[:phone]
       hours_of_operation = facility[:daysopen]
-      @facilities << Facility.new({name: name, address: address, phone: phone, hours_of_operation: hours_of_operation})
+      holidays_closed = facility[:holidaysclosed]
+      @facilities << Facility.new({name: name, address: address, phone: phone, hours_of_operation: hours_of_operation, holidays_closed: holidays_closed})
     end
   end
 
