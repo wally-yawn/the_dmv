@@ -14,4 +14,19 @@ class VehicleFactory
       @vehicles << Vehicle.new({vin: vin, year: year, make: make, model: model, engine: engine})
     end
   end
+
+  def most_popular_make_model_registered
+    make_and_model_count = Hash.new(0)
+    @vehicles.each do |vehicle|
+      make_model = "#{vehicle.make} #{vehicle.model}"
+      make_and_model_count[make_model] += 1
+    end
+    make_and_model_count.max_by { |key, value| value }
+  end
+
+  def vehicles_by_year(year)
+    #require 'pry'; binding.pry
+    vehicles_in_year = @vehicles.find_all {|vehicle| vehicle.year == year}
+    vehicles_in_year.length
+  end
 end
