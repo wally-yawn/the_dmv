@@ -22,6 +22,7 @@ RSpec.describe VehicleFactory do
       expect(@vehicle_factory1.vehicles[0].make).to eq('TESLA')
       expect(@vehicle_factory1.vehicles[0].model).to eq('Model Y')
       expect(@vehicle_factory1.vehicles[0].engine).to eq(:ev)
+      expect(@vehicle_factory1.vehicles[0].county).to eq('King')
       expect(@vehicle_factory1.vehicles[0].registration_date).to eq(nil)
       expect(@vehicle_factory1.vehicles[0].plate_type).to eq(nil)
       expect(@vehicle_factory1.vehicles.length).to eq(1000)
@@ -41,7 +42,7 @@ RSpec.describe VehicleFactory do
       expect(@vehicle_factory1.vehicles_by_year('2024')).to eq(26)
     end
     it 'can get the county with the most registered vehicles' do
-      expect(@vehicle_factory1.county_with_most_registered_vehicles).to eq(['Puget', 176])
+      expect(@vehicle_factory1.county_with_most_registered_vehicles).to eq(['King', 750])
     end
   end
 end

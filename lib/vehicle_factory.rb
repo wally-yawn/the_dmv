@@ -10,8 +10,9 @@ class VehicleFactory
       year = registration[:model_year]
       make = registration[:make]
       model = registration[:model]
+      county = registration[:county]
       engine = :ev
-      @vehicles << Vehicle.new({vin: vin, year: year, make: make, model: model, engine: engine})
+      @vehicles << Vehicle.new({vin: vin, year: year, make: make, model: model, engine: engine, county: county})
     end
   end
 
@@ -25,8 +26,15 @@ class VehicleFactory
   end
 
   def vehicles_by_year(year)
-    #require 'pry'; binding.pry
     vehicles_in_year = @vehicles.find_all {|vehicle| vehicle.year == year}
     vehicles_in_year.length
+  end
+
+  def county_with_most_registered_vehicles
+    county_count = Hash.new(0)
+    @vehicles.each do |vehicle|
+      county_count[vehicle.county] += 1
+    end
+    county_count.max_by { |key, value| value }
   end
 end
